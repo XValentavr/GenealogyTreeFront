@@ -1,0 +1,10 @@
+.leftSidebar {
+    color: #fff;
+    width: 25%;
+    padding-left: 20px;
+    height: 100vh;
+    background-image: linear-gradient(30deg , #0048bd, #44a7fd);
+    display: table-cell;
+    overflow:auto;
+
+}
