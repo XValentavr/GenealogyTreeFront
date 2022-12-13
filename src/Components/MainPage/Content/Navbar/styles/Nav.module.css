@@ -17,7 +17,7 @@
     margin: auto;
 }
 
-.wrapper li:hover,a:hover {
+.wrapper li:hover,a:hover,.wrapper a.active {
     background-image: url('https://scottyzen.sirv.com/Images/v/button.png');
     background-size: 100% 100%;
     color: #27262c;

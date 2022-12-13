@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import classes from './Modal.module.css'
+import classes from './styles/Modal.module.css'
 import ReactDOM from "react-dom";
 const portalFeedback = document.getElementById('overlays')
 const Overlay = props => {

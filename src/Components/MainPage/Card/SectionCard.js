@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './SectionCard.module.css'
+import classes from './styles/SectionCard.module.css'
 
 const SectionCard = props => {
     return (

@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import classes from './Button.module.css'
+import classes from './styles/Button.module.css'
 import PropTypes from "prop-types";
 
 const Button = ({label, type, disabled, buttonText}) => {

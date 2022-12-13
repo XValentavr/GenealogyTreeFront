@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import classes from "./Feedback.module.css";
+import classes from "./styles/Feedback.module.css";
 import Modal from "../../UI/Modal";
 import FormCard from "../../Card/FormCard";
 import Auth from "./Auth";

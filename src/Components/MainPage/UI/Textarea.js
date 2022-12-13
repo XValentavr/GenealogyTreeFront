@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './Textarea.module.css'
+import classes from './styles/Textarea.module.css'
 import LabelCard from "../Card/LabelCard";
 import PropTypes from "prop-types";
 

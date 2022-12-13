@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './LabelCard.module.css'
+import classes from './styles/LabelCard.module.css'
 
 const LabelCard = props => {
     return (

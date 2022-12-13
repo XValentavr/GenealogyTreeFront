@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Input from "../../UI/Input";
-import classes from "./Feedback.module.css";
+import classes from "./styles/Feedback.module.css";
 import Button from "../../UI/Button";
 import ShowPassword from "../../UI/ShowPassword";
 

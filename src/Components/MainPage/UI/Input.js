@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './Input.module.css'
+import classes from './styles/Input.module.css'
 import LabelCard from "../Card/LabelCard";
 import useInput from "../hooks/use-input";
 
