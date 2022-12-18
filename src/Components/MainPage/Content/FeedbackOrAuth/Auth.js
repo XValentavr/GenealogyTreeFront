@@ -18,9 +18,9 @@ const Auth = ({submitHandler, onCheckIsValidHandler, formIsValid}) => {
                        label="Ваш пароль"/>
                 <ShowPassword label={!show ? "show" : "hide"} togglePassword={togglePassword}/>
             </div>
-            <Input onCheckIsValid={onCheckIsValidHandler} id="Email" inputClass={classes["user-box"]}
+            <Input onCheckIsValid={onCheckIsValidHandler} id="email" inputClass={classes["user-box"]}
                    type="text" label="Пошта" name="Email"/>
-            <Button disabled={!formIsValid} type="submit" buttonText="Увійти">
+            <Button type="submit" buttonText="Увійти">
             </Button>
         </form>
     )

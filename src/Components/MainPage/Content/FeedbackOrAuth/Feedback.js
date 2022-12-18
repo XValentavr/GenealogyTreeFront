@@ -6,13 +6,13 @@ import Input from "../../UI/Input";
 import Textarea from "../../UI/Textarea";
 import Button from "../../UI/Button";
 import {useDispatch} from "react-redux";
-import {authActions} from "../../../../slices/authFormSlices/authFormSlice";
+import { authFormActions } from "../../../../common/slices/authFormSlices/authFormSlice";
 import PropTypes from "prop-types";
 
 const Feedback = ({onCheckIsValidHandler, formIsValid, submitHandler}) => {
     const dispatch = useDispatch()
     const onCloseFormHandler = () => {
-        dispatch(authActions.openOrCloseForm())
+        dispatch(authFormActions.openOrCloseForm())
     }
     return (
         <Modal onClose={onCloseFormHandler}>

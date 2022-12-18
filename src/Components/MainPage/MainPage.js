@@ -3,12 +3,15 @@ import AboutUs from "./Content/AboutUs/AboutUs";
 import Homepage from "./Content/Homepage/Homepage";
 import FeedbackOrAuthForm from "./Content/FeedbackOrAuth/FeedbackOrAuthForm";
 import { useSelector } from "react-redux";
-import { getAuthFormIsOpened } from "../../slices/authFormSlices/authFormSelectors";
+import { getAuthFormIsOpened } from "../../common/selectors/authFormSelectors/authFormSelectors";
 import { Redirect, Route, Switch } from "react-router-dom";
 import MainNav from "./Content/Navbar/MainNav";
+import Profile from "../Profile/Profile";
+import { getAuthToken, getIsLoggedIn } from "../../common/selectors/authorizationSelectors/authorizeSelector";
 
 const MainPage = props => {
   const authFormIsOpened = useSelector(getAuthFormIsOpened)
+  const isLoggedIn = useSelector(getIsLoggedIn)
   return (
     <MainNav>
       {authFormIsOpened ?
@@ -23,6 +26,10 @@ const MainPage = props => {
           <Route path="/about">
             <AboutUs/>
           </Route>
+          {isLoggedIn && <Route path="/profile">
+            <Profile/>
+          </Route>}
+          {!isLoggedIn && <Redirect to="/homepage"/>}
         </Switch>
       }
     </MainNav>

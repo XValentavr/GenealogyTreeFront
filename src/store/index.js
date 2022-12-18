@@ -1,8 +1,12 @@
-import {configureStore} from "@reduxjs/toolkit";
-import authSlice from "../slices/authFormSlices/authFormSlice";
+import { configureStore } from "@reduxjs/toolkit";
+import authFormActions from "../common/slices/authFormSlices/authFormSlice";
+import authorizeActions from "../common/slices/register/authorizeSlice";
 
 
 const store = configureStore({
-    reducer: {auth: authSlice.reducer}
+  reducer: {
+    authForm: authFormActions.reducer,
+    authorize: authorizeActions.reducer
+  }
 })
 export default store
