@@ -1,13 +1,19 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import classes from './styles/Nav.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { authFormActions } from "../../../../common/slices/authFormSlices/authFormSlice";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams, useRouteMatch } from "react-router-dom";
 import { getAuthToken } from "../../../../common/selectors/authorizationSelectors/authorizeSelector";
-import { authorizeActions } from "../../../../common/slices/register/authorizeSlice";
+import { authorizeActions } from "../../../../common/slices/registerSlices/authorizeSlice";
+import getUserHandler from "../../../../common/handlers/userHandlers/getUserHandler";
+import { getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
+import { userInformationActions } from "../../../../common/slices/userSlices/userInformationSlice";
+import { userActions } from "../../../../common/slices/userSlices/userSlice";
 
 const Nav = props => {
   const dispatch = useDispatch()
+  let link = '/homepage'
+  const isLoggedIn = useSelector(getAuthToken)
 
   const openFeedbackOrAuthHandler = event => {
     dispatch(authFormActions.setFormType(event.target.id))
@@ -16,9 +22,19 @@ const Nav = props => {
 
   const logoutHandler = useCallback(() => {
     dispatch(authorizeActions.logout())
-  }, [dispatch])
+    dispatch(userInformationActions.deleteInformation())
+    dispatch(userActions.deleteUser())
 
-  const isLoggedIn = useSelector(getAuthToken)
+  }, [dispatch])
+  useEffect(() => {
+    dispatch(getUserHandler())
+
+  }, [isLoggedIn])
+
+  const user = useSelector(getUser)
+  if (user) {
+    link = `/profile/${user?.id}`
+  }
   return (
     <div className={classes.wrapper}>
       <ul>
@@ -31,7 +47,7 @@ const Nav = props => {
         {isLoggedIn && (
           <>
             <li>
-              <NavLink activeClassName={classes.active} to="/profile">Профіль</NavLink>
+              <NavLink activeClassName={classes.active} to={link}>Профіль</NavLink>
             </li>
             <li id='logout' onClick={logoutHandler}>Вийти з акаунту</li>
           </>

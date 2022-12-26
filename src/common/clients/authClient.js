@@ -1,20 +1,16 @@
+import { getAuthToken } from "../selectors/authorizationSelectors/authorizeSelector";
+
 class AuthClient {
-  _makeRequest = async (endpoint, {
-    method,
-    headers,
-    body,
-    params
-  }) => {
+
+  _getAccessToken = async () => {
+    localStorage.getItem('token')
+  }
+  _makeRequest = async (endpoint, fetchData) => {
     try {
       let url = 'http://localhost:8000/' + endpoint;
-      const accessToken = '';
       let response;
       try {
-        response = await fetch(url, {
-          method: method || 'GET',
-          headers: { ...headers },
-          body: body ? JSON.stringify(body) : ''
-        });
+        response = await fetch(url, { ...fetchData });
       } catch (error) {
         console.log(error);
       }
@@ -36,27 +32,44 @@ class AuthClient {
       throw error
     }
   }
-  register = async (value) => {
+  register = async (register) => {
     return this._makeRequest("auth/api/v1/users/", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: value
+      body: JSON.stringify(register)
     })
   }
 
-  auth = async (value) => {
+  authorize = async (authData) => {
     return this._makeRequest("auth/api/v1/token/login/", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: value
+      body: JSON.stringify(authData)
     })
   }
 
-  reset = async (value) => {
+  getDataByToken = async () => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest("auth/api/v1/useruuid/", {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      }
+    })
+  }
+  reset = async (reset) => {
     return this._makeRequest("auth/api/v1/users/reset_password/", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: value
+      body: JSON.stringify(reset)
+    })
+  }
+  support = async (support) => {
+    return this._makeRequest("support/api/v1/", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(support)
     })
   }
 }

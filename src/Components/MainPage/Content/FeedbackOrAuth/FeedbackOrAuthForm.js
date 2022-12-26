@@ -6,10 +6,6 @@ import {authFormActions} from "../../../../common/slices/authFormSlices/authForm
 import {getAuthFormType} from "../../../../common/selectors/authFormSelectors/authFormSelectors";
 
 const FeedbackOrAuthForm = props => {
-    const [formIsValid, setFormIsValid] = useState(false)
-
-    const onCheckIsValidHandler = flag => setFormIsValid(flag)
-
 
     const dispatch = useDispatch()
     const authFormType = useSelector(getAuthFormType)
@@ -26,18 +22,13 @@ const FeedbackOrAuthForm = props => {
 
     if (authFormType === "feedback") {
         return (
-            <Feedback
-                onCheckIsValidHandler={onCheckIsValidHandler}
-                formIsValid={formIsValid}
-            />)
+            <Feedback/>)
     } else {
         return (
             <AuthOrRegister
                 onClose={closeFeedbackOrAuthHandler}
                 onChangeFormType={changeFormTypeHandler}
                 formType={authFormType}
-                onCheckIsValidHandler={onCheckIsValidHandler}
-                formIsValid={formIsValid}
             />)
     }
 }

@@ -7,7 +7,7 @@ import { getAuthFormIsOpened } from "../../common/selectors/authFormSelectors/au
 import { Redirect, Route, Switch } from "react-router-dom";
 import MainNav from "./Content/Navbar/MainNav";
 import Profile from "../Profile/Profile";
-import { getAuthToken, getIsLoggedIn } from "../../common/selectors/authorizationSelectors/authorizeSelector";
+import { getIsLoggedIn } from "../../common/selectors/authorizationSelectors/authorizeSelector";
 
 const MainPage = props => {
   const authFormIsOpened = useSelector(getAuthFormIsOpened)
@@ -26,11 +26,15 @@ const MainPage = props => {
           <Route path="/about">
             <AboutUs/>
           </Route>
-          {isLoggedIn && <Route path="/profile">
+          {isLoggedIn && <Route path="/profile/:userUUID" exact>
             <Profile/>
           </Route>}
           {!isLoggedIn && <Redirect to="/homepage"/>}
+          <Route path='*' exact>
+            <Redirect to="/homepage"/>
+          </Route>
         </Switch>
+
       }
     </MainNav>
   );

@@ -13,26 +13,26 @@ const Register = props => {
   return (
     <form onSubmit={props.submitHandler}>
       <div>
-        <Input onCheckIsValid={props.onCheckIsValidHandler} id="password" inputClass={classes["user-box"]}
+        <Input id="password" inputClass={classes["user-box"]}
                type={!show ? "password" : "text"}
                name="Password"
                label="Ваш пароль"
         />
         <ShowPassword label={!show ? "show" : "hide"} togglePassword={togglePassword}/>
       </div>
-      <Input onCheckIsValid={props.onCheckIsValidHandler} id="re_password" inputClass={classes["user-box"]}
+      <Input id="re_password" inputClass={classes["user-box"]}
              type={!show ? "password" : "text"}
              name="RepPassword"
              label="Повторіть пароль"
       />
-      <Input onCheckIsValid={props.onCheckIsValidHandler} id="email" inputClass={classes["user-box"]}
+      <Input id="email" inputClass={classes["user-box"]}
              type="text" label="Пошта" name="Email"
       />
-      <Input onCheckIsValid={props.onCheckIsValidHandler} id="username" inputClass={classes["user-box"]}
+      <Input id="username" inputClass={classes["user-box"]}
              type="text"
              name="username"
              label="Введіть ФІО"
-             />
+      />
       <Button type="submit" buttonText="Зареєструватися">
       </Button>
     </form>

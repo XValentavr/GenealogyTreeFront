@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './UserLeftSidebar.module.css'
+import classes from './styles/UserLeftSidebar.module.css'
 import UserAvatar from "./UserAvatar";
 import UserPersonalInfo from "./UserPersonalInfo";
 

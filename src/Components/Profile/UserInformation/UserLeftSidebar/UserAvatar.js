@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './UserAvatar.module.css'
+import classes from './styles/UserAvatar.module.css'
 
 const UserAvatar = props => {
     return (

@@ -6,17 +6,18 @@ import Auth from "./Auth";
 import Register from "./Register";
 import ResetPassword from "./ResetPassword";
 import PropTypes from "prop-types";
-import fetchRegisterThunk from "../../../../common/slices/register/thunks/fetchRegisterThunk";
-import fetchAuthThunk from "../../../../common/slices/register/thunks/fetchAuthThunk";
 import { useDispatch, useSelector } from "react-redux";
-import { authorizeActions } from "../../../../common/slices/register/authorizeSlice";
 import { authFormActions } from "../../../../common/slices/authFormSlices/authFormSlice";
-import fetchResetThunk from "../../../../common/slices/register/thunks/fetchResetThunk";
+import registerHandler from "../../../../common/handlers/registerHandlers/registerHandler";
+import authHandler from "../../../../common/handlers/registerHandlers/authHandler";
+import resetHandler from "../../../../common/handlers/registerHandlers/resetHandler";
+import getUserHandler from "../../../../common/handlers/userHandlers/getUserHandler";
+import { useHistory } from "react-router-dom";
+import { getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
 
-
-const AuthOrRegister = ({ formType, onClose, onChangeFormType, onCheckIsValidHandler, formIsValid }) => {
+const AuthOrRegister = ({ formType, onClose, onChangeFormType }) => {
   const dispatch = useDispatch()
-
+  const history = useHistory()
   const formSubmitHandler = async event => {
     event.preventDefault()
 
@@ -28,17 +29,16 @@ const AuthOrRegister = ({ formType, onClose, onChangeFormType, onCheckIsValidHan
           re_password: event.target.re_password.value,
           email: event.target.email.value
         }
-        await fetchRegisterThunk(register)
+        dispatch(registerHandler(register))
         dispatch(authFormActions.openOrCloseForm())
         break
 
       case "auth":
-        const auth = {
+        const authData = {
           email: event.target.email.value,
           password: event.target.password.value
         }
-        const authResponse = await fetchAuthThunk(auth)
-        dispatch(authorizeActions.login(authResponse.auth_token))
+        dispatch(authHandler(authData))
         dispatch(authFormActions.openOrCloseForm())
         break
 
@@ -46,7 +46,7 @@ const AuthOrRegister = ({ formType, onClose, onChangeFormType, onCheckIsValidHan
         const reset = {
           email: event.target.email.value,
         }
-        await fetchResetThunk(reset)
+        dispatch(resetHandler(reset))
         dispatch(authFormActions.openOrCloseForm())
         break
     }
@@ -73,20 +73,13 @@ const AuthOrRegister = ({ formType, onClose, onChangeFormType, onCheckIsValidHan
             </Fragment>
         }
         {formType === "register" &&
-          <Register submitHandler={formSubmitHandler}
-                    onCheckIsValidHandler={onCheckIsValidHandler}
-                    formIsValid={formIsValid}/>}
+          <Register submitHandler={formSubmitHandler}/>}
 
         {formType === "auth" &&
-          <Auth submitHandler={formSubmitHandler}
-                onCheckIsValidHandler={onCheckIsValidHandler}
-                formIsValid={formIsValid}/>}
+          <Auth submitHandler={formSubmitHandler}/>}
 
         {formType === "reset" &&
-          <ResetPassword submitHandler={formSubmitHandler}
-                         onCheckIsValidHandl1er={onCheckIsValidHandler}
-                         formIsValid={formIsValid}
-          />}
+          <ResetPassword submitHandler={formSubmitHandler}/>}
       </FormCard>
     </Modal>
   );
