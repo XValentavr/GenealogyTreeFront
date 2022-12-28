@@ -3,7 +3,7 @@ import Nav from "./Nav";
 const MainNav = props => {
   return (
     <>
-      <Nav/>
+      <Nav isLoggedIn ={props.isLoggedIn}/>
       <main>{props.children}</main>
     </>
   )

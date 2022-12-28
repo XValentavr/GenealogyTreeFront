@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import userInformationApiClient from "../../../clients/userInformationApiClient";
+import userInformationApiClient from "../../../clients/usersApiClient";
 
 export const fetchUserInformation = createAsyncThunk(
   'information/fetchUserInformation',

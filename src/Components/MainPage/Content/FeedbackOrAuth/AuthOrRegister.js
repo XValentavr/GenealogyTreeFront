@@ -6,18 +6,14 @@ import Auth from "./Auth";
 import Register from "./Register";
 import ResetPassword from "./ResetPassword";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authFormActions } from "../../../../common/slices/authFormSlices/authFormSlice";
 import registerHandler from "../../../../common/handlers/registerHandlers/registerHandler";
 import authHandler from "../../../../common/handlers/registerHandlers/authHandler";
 import resetHandler from "../../../../common/handlers/registerHandlers/resetHandler";
-import getUserHandler from "../../../../common/handlers/userHandlers/getUserHandler";
-import { useHistory } from "react-router-dom";
-import { getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
 
 const AuthOrRegister = ({ formType, onClose, onChangeFormType }) => {
   const dispatch = useDispatch()
-  const history = useHistory()
   const formSubmitHandler = async event => {
     event.preventDefault()
 

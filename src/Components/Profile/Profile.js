@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import UserLeftSidebar from "./UserInformation/UserLeftSidebar/UserLeftSidebar";
 import UserRightSidebar from "./UserInformation/UserRightSidebar/UserRightSidebar";
 import classes from './Profile.module.css'

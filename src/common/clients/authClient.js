@@ -1,4 +1,3 @@
-import { getAuthToken } from "../selectors/authorizationSelectors/authorizeSelector";
 
 class AuthClient {
 

@@ -8,15 +8,8 @@ import {
 import { useParams } from "react-router-dom";
 
 const UserPersonalInfo = props => {
-  const dispatch = useDispatch()
   const readonly = false
-  const uuid = useParams()
 
-
-  useEffect(() => {
-    dispatch(getUserInformation(uuid?.userUUID))
-
-  }, [dispatch])
   const data = useSelector(getUserProfileInformation)
   return (
     <Fragment>

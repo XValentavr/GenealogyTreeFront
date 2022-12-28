@@ -3,26 +3,12 @@ class TreeApiClient {
   _getAccessToken = async () => {
     throw new Error('No info')
   }
-  _makeRequest = async (endpoint, {
-    method,
-    headers,
-    body,
-    params
-  }) => {
+  _makeRequest = async (endpoint, fetchData) => {
     try {
       let url = 'http://localhost:8000/' + endpoint;
-      const accessToken = '';
       let response;
       try {
-        response = await fetch(url, {
-          method: method || 'GET',
-          headers: {
-            Authorization: `Token ${accessToken}`,
-            ...headers,
-            'Content-Type': 'application/json'
-          },
-          body: body ? JSON.stringify(body) : ''
-        });
+        response = await fetch(url, { ...fetchData });
       } catch (error) {
         console.log(error);
       }
@@ -32,16 +18,51 @@ class TreeApiClient {
       } catch (error) {
         console.log(error)
       }
-      if (!response.of) {
-        console.log("Not data")
+      if (!response.ok) {
+        console.log(response)
       }
       if (!json) {
         console.log('Not data json')
       }
+      console.log(json)
       return json ? json : response
     } catch (error) {
       throw error
     }
   }
-
+  orderCreatingTree = (client) => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`genealogistbuildstree/api/v1/fetch/`, {
+      method: "POST",
+      body: JSON.stringify({ client }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
+  orderGettingTree = () => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`genealogistbuildstree/api/v1/fetch/`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
+  orderPatchTree = (client, genealogist) => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`genealogistbuildstree/${client}/api/v1/fetch/`, {
+      method: "PATCH",
+      body: JSON.stringify({ genealogist }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
 }
+
+
+export default new TreeApiClient()

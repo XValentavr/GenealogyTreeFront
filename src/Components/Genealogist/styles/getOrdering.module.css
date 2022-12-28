@@ -1,0 +1,18 @@
+.order {
+    margin: auto;
+    margin-top: 2%;
+    padding: 1% 1% 1% 1%;
+    width: 30%;
+    background-color: #3f87a6;
+}
+
+.innerOrderClass {
+    background-color: rosybrown;
+}
+
+.info {
+    font-size: large;
+    font-weight: bold;
+    color: black;
+
+}

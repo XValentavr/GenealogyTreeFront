@@ -1,4 +1,4 @@
-class userInformationApiClient {
+class usersApiClient {
 
   _getAccessToken = () => {
     localStorage.getItem('token')
@@ -42,5 +42,17 @@ class userInformationApiClient {
       },
     })
   }
+
+  getAllUsers = async () => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`users/api/v1/fetch/`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
+
 }
-export default new userInformationApiClient();
+export default new usersApiClient();
