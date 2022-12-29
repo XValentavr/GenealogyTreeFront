@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import treeApiClient from "../../../clients/treeApiClient";
 
 export const fetchPatchOrdering = createAsyncThunk(
-  'ordering/fetchPatchOrdering',
+  'orderingHandlers/fetchPatchOrdering',
   async ({ client, genealogist, }, { rejectWithValue }) => {
     try {
       await treeApiClient.orderPatchTree(client, genealogist)

@@ -2,7 +2,7 @@ import React from "react";
 import classes from './styles/UserStory.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { getIsMainGenealogist, getUser } from "../../../common/selectors/userSelectors/userDataSelector";
-import createOrderingHandler from "../../../common/handlers/ordering/createOrderingHandler";
+import createOrderingHandler from "../../../common/handlers/orderingHandlers/createOrderingHandler";
 
 const UserStory = props => {
 

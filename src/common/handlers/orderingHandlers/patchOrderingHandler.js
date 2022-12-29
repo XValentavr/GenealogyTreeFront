@@ -1,4 +1,4 @@
-import { fetchPatchOrdering } from "../../slices/ordering/thunks/fetchPatchOrdering";
+import { fetchPatchOrdering } from "../../slices/orderingSlices/thunks/fetchPatchOrdering";
 
 const patchOrderingHandler = (client, genealogist) => async (dispatch) => {
   await dispatch(fetchPatchOrdering({ client, genealogist }))

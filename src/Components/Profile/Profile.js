@@ -21,11 +21,10 @@ const Profile = props => {
   const user = useSelector(getUser)
   const history = useHistory()
   if (user) {
-    if (params.userUUID === user?.id) {
+    if (params.userId === user?.id) {
       return userFragment
     }
     history.push(`/profile${user}`)
-    return userFragment
   }
 }
 export default Profile

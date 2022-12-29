@@ -62,6 +62,28 @@ class TreeApiClient {
       },
     })
   }
+  getInitialTree = (currentUserId) => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`tree/${currentUserId}/api/v1/fetch/root`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
+
+  patchTreeData = (currentTreeId, data) => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`tree/${currentTreeId}/api/v1/fetch/tree`, {
+      method: "PATCH",
+      body: JSON.stringify({ data }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
 }
 
 

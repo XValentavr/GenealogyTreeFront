@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getOrdering } from "../../common/selectors/treeSelectors/orderingSelector";
-import getOrderingHandler from "../../common/handlers/ordering/getOrderingHandler";
+import getOrderingHandler from "../../common/handlers/orderingHandlers/getOrderingHandler";
 import { useEffect, useState } from "react";
 import classes from './styles/getOrdering.module.css'
 import GenealogistList from "./GenealogistList";

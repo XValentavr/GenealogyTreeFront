@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import treeApiClient from "../../../clients/treeApiClient";
 
 export const fetchGettingOrdering = createAsyncThunk(
-  'ordering/fetchGettingOrdering',
+  'orderingHandlers/fetchGettingOrdering',
   async (_, { rejectWithValue }) => {
     try {
       const response = await treeApiClient.orderGettingTree()

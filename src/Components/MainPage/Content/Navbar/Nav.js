@@ -5,10 +5,12 @@ import { authFormActions } from "../../../../common/slices/authFormSlices/authFo
 import { NavLink } from "react-router-dom";
 import { authorizeActions } from "../../../../common/slices/registerSlices/authorizeSlice";
 import getUserHandler from "../../../../common/handlers/userHandlers/getUserHandler";
-import { getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
+import { getIsGenealogist, getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
 import { userInformationActions } from "../../../../common/slices/userSlices/userInformationSlice";
 import { userActions } from "../../../../common/slices/userSlices/userSlice";
 import getUserInformation from "../../../../common/handlers/userHandlers/getUserInformation";
+import treeInitialHandler from "../../../../common/handlers/treeHandlers/treeInitialHandler";
+import { getInitialTreeId } from "../../../../common/selectors/treeSelectors/treeSelectors";
 
 let link = '/homepage'
 
@@ -29,18 +31,22 @@ const Nav = props => {
 
   useEffect(() => {
     dispatch(getUserHandler())
-
   }, [props.isLoggedIn, dispatch])
 
   const user = useSelector(getUser)
+  const initialTree = useSelector(getInitialTreeId)
+
   if (user) {
     link = `/profile/${user?.id}`
   }
   useEffect(() => {
     if (user) {
       dispatch(getUserInformation(user.id))
+      dispatch(treeInitialHandler(user.id))
     }
+
   }, [user])
+  const isGenealogist = useSelector(getIsGenealogist)
   return (
     <div className={classes.wrapper}>
       <ul>
@@ -56,9 +62,16 @@ const Nav = props => {
         }
         {props.isLoggedIn && (
           <>
-            <li>
-              <NavLink activeClassName={classes.active} to="/genealogist">Замовлення</NavLink>
-            </li>
+            {isGenealogist &&
+              <li>
+                <NavLink activeClassName={classes.active} to="/genealogist">Замовлення</NavLink>
+              </li>
+            }
+            {initialTree &&
+              <li>
+                <NavLink activeClassName={classes.active} to={`/tree/${initialTree}`}>Ваше дерево</NavLink>
+              </li>
+            }
             <li>
               <NavLink activeClassName={classes.active} to={link}>Профіль</NavLink>
             </li>

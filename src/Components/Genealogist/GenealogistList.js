@@ -5,7 +5,7 @@ import getUsersHandler from "../../common/handlers/userHandlers/getAllUsers";
 import { getUsersIsGenealogist } from "../../common/selectors/usersSelectors/usersSelectors";
 import FormCard from "../MainPage/Card/FormCard";
 import classes from "./styles/GenealogistInListStyle.module.css"
-import patchOrderingHandler from "../../common/handlers/ordering/patchOrderingHandler";
+import patchOrderingHandler from "../../common/handlers/orderingHandlers/patchOrderingHandler";
 
 
 const GenealogistList = ({ onClose, orderId, setIsOnModal, isOnModal }) => {

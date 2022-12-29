@@ -11,6 +11,7 @@ import { getIsLoggedIn } from "../../common/selectors/authorizationSelectors/aut
 import GenealogistRegister from "../Genealogist/GenealogistRegister";
 import { getIsMainGenealogist } from "../../common/selectors/userSelectors/userDataSelector";
 import Genealogist from "../Genealogist/Genealogist";
+import TreeArea from "../Tree/TreeArea";
 
 const MainPage = props => {
   const authFormIsOpened = useSelector(getAuthFormIsOpened)
@@ -21,9 +22,6 @@ const MainPage = props => {
       {authFormIsOpened ?
         <FeedbackOrAuthForm/> :
         <Switch>
-          {isGenealogist && <Route path="/genealogist" exact>
-            <Genealogist/>
-          </Route>}
           <Route path='/' exact>
             <Redirect to="/homepage"/>
           </Route>
@@ -39,8 +37,14 @@ const MainPage = props => {
                 <GenealogistRegister/>
               </Route>
             </>)}
-          {isLoggedIn && <Route path="/profile/:userUUID" exact>
+          {isGenealogist && <Route path="/genealogist" exact>
+            <Genealogist/>
+          </Route>}
+          {isLoggedIn && <Route path="/profile/:userId" exact>
             <Profile/>
+          </Route>}
+          {isLoggedIn && <Route path="/tree/:treeId" exact>
+            <TreeArea/>
           </Route>}
           {!isLoggedIn && <Redirect to="/homepage"/>}
           <Route path='*' exact>
