@@ -24,9 +24,9 @@ const TreeRootElement = props => {
   return (
     <div className={classes.outer}>
       <TreeButton onClickHandler={onShowHandler} type="button" id="ShowMore" text="Показати більше інформації"/>
-      <TreeInput readOnly={true} type="text" id={rootTree.userName} text="Ім'я" value={rootTree.firstName}/>
+      <TreeInput readOnly={true} type="text" id={rootTree.firstName} text="Ім'я" value={rootTree.firstName}/>
       <TreeInput readOnly={true} type={"text"} id={rootTree.surname} text={"Фамілія"} value={rootTree.surname}/>
-      <TreeInput readOnly={true} type={"text"} id={rootTree.last_name} text={"По-батькові"} value={rootTree.lastName}/>
+      <TreeInput readOnly={true} type={"text"} id={rootTree.lastName} text={"По-батькові"} value={rootTree.lastName}/>
       <TreeButton onClickHandler={onAddHandler} type="button" id="add" text="Додати"/>
       {showMore && <TreeShowMore onClose={closeHandler} entireData={rootTree}/>}
       {addMore && <>

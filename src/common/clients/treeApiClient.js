@@ -7,6 +7,7 @@ class TreeApiClient {
     try {
       let url = 'http://localhost:8000/' + endpoint;
       let response;
+      console.log({ ...fetchData })
       try {
         response = await fetch(url, { ...fetchData });
       } catch (error) {
@@ -41,9 +42,17 @@ class TreeApiClient {
       },
     })
   }
-  orderGettingTree = () => {
+  orderGettingTree = (status) => {
     const token = localStorage.getItem('token')
-    return this._makeRequest(`genealogistbuildstree/api/v1/fetch/`, {
+    const params = {}
+    let url = `genealogistbuildstree/api/v1/fetch/`
+
+    if (status) {
+      params.status = status
+      url = `genealogistbuildstree/api/v1/fetch/?status=${status}`
+    }
+
+    return this._makeRequest(url, {
       method: "GET",
       headers: {
         'Content-Type': 'application/json',
@@ -56,6 +65,18 @@ class TreeApiClient {
     return this._makeRequest(`genealogistbuildstree/${client}/api/v1/fetch/`, {
       method: "PATCH",
       body: JSON.stringify({ genealogist }),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
+
+  orderPatchColorTree = (client, colorCode) => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`genealogistbuildstree/${client}/api/v1/fetch/`, {
+      method: "PATCH",
+      body: JSON.stringify({ colorCode }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`,
@@ -77,7 +98,7 @@ class TreeApiClient {
     const token = localStorage.getItem('token')
     return this._makeRequest(`tree/${currentTreeId}/api/v1/fetch/tree`, {
       method: "PATCH",
-      body: JSON.stringify({ data }),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`,

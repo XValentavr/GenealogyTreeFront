@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { StatusesHelper } from "../../helpers/statusesHelper";
+import { StatusesOfFetchingHelper } from "../../helpers/statusesOfFetchingHelper";
 import { fetchSupport } from "./thunks/fetchSupport";
 
 const supportSlice = createSlice({
@@ -11,15 +11,15 @@ const supportSlice = createSlice({
     reducers: {},
     extraReducers: {
       [fetchSupport.pending]: (state) => {
-        state.status = StatusesHelper.LOADING
+        state.status = StatusesOfFetchingHelper.LOADING
         state.error = null
       },
       [fetchSupport.fulfilled]: (state) => {
-        state.status = StatusesHelper.COMPLETED
+        state.status = StatusesOfFetchingHelper.COMPLETED
         state.error = null
       },
       [fetchSupport.rejected]: (state, action) => {
-        state.status = StatusesHelper.ERROR
+        state.status = StatusesOfFetchingHelper.ERROR
         state.error = action.error;
       }
     }

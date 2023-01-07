@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAuth } from "./thunks/fetchAuthThunk";
-import { StatusesHelper } from "../../helpers/statusesHelper";
+import { StatusesOfFetchingHelper } from "../../helpers/statusesOfFetchingHelper";
 
 const authorizeSlice = createSlice({
   name: "authorize",
@@ -19,7 +19,7 @@ const authorizeSlice = createSlice({
   },
   extraReducers: {
     [fetchAuth.pending]: (state) => {
-      state.state = StatusesHelper.LOADING
+      state.state = StatusesOfFetchingHelper.LOADING
       state.error = null
     },
     [fetchAuth.fulfilled]: (state, action) => {
@@ -31,10 +31,10 @@ const authorizeSlice = createSlice({
         state.isLoggedIn = true
       }
       state.error = null
-      state.state = StatusesHelper.COMPLETED
+      state.state = StatusesOfFetchingHelper.COMPLETED
     },
     [fetchAuth.rejected]: (state, action) => {
-      state.status = StatusesHelper.ERROR
+      state.status = StatusesOfFetchingHelper.ERROR
       state.error = action.error;
     }
   }

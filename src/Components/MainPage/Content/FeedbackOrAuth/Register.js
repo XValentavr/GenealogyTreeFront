@@ -3,7 +3,6 @@ import Input from "../../UI/Input";
 import classes from "./styles/Feedback.module.css";
 import Button from "../../UI/Button";
 import ShowPassword from "../../UI/ShowPassword";
-import { useRef } from "react";
 
 const Register = props => {
   const [show, setShow] = useState(false)
