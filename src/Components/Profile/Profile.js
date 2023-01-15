@@ -20,6 +20,7 @@ const Profile = props => {
   const params = useParams()
   const user = useSelector(getUser)
   const history = useHistory()
+
   if (user) {
     if (params.userId === user?.id) {
       return userFragment

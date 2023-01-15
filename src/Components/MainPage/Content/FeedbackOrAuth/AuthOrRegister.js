@@ -24,7 +24,7 @@ const AuthOrRegister = ({ formType, onClose, onChangeFormType }) => {
           password: event.target.password.value,
           re_password: event.target.re_password.value,
           email: event.target.email.value,
-          is_genealogist: false
+          isGenealogist: false
         }
         dispatch(registerHandler(register))
         dispatch(authFormActions.openOrCloseForm())

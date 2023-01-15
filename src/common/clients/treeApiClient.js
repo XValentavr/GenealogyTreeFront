@@ -60,11 +60,11 @@ class TreeApiClient {
       },
     })
   }
-  orderPatchTree = (client, genealogist) => {
+  orderPatchTree = (client, status, genealogist) => {
     const token = localStorage.getItem('token')
     return this._makeRequest(`genealogistbuildstree/${client}/api/v1/fetch/`, {
       method: "PATCH",
-      body: JSON.stringify({ genealogist }),
+      body: status ? JSON.stringify({ status }) : JSON.stringify({ genealogist }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Token ${token}`,
@@ -96,6 +96,8 @@ class TreeApiClient {
 
   patchTreeData = (currentTreeId, data) => {
     const token = localStorage.getItem('token')
+    console.log('21312313', data)
+    console.log("JSON.stringify(data)", JSON.stringify(data))
     return this._makeRequest(`tree/${currentTreeId}/api/v1/fetch/tree`, {
       method: "PATCH",
       body: JSON.stringify(data),

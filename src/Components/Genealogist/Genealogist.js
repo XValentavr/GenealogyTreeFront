@@ -1,11 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getOrdering } from "../../common/selectors/treeSelectors/orderingSelector";
+import {
+  getOrdering,
+} from "../../common/selectors/treeSelectors/orderingSelector";
 import getOrderingHandler from "../../common/handlers/orderingHandlers/getOrderingHandler";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classes from './styles/GenealogistGetOrdering.module.css'
 import GenealogistList from "./GenealogistList";
 import GenealogistDropdownStatuses from "./GenealogistDropdownStatuses";
 import patchOrderingColorHandler from "../../common/handlers/orderingHandlers/patchOrderingColorHandler";
+import patchOrderingStatusHandler from "../../common/handlers/orderingHandlers/patchOrderingStatusHandler";
+import { Link} from "react-router-dom";
 
 const Genealogist = props => {
   const dispatch = useDispatch()
@@ -18,7 +22,7 @@ const Genealogist = props => {
 
   useEffect(() => {
     dispatch(getOrderingHandler())
-  }, [isOnModal, color])
+  }, [dispatch, isOnModal, color])
 
 
   const modalHandler = (order) => {
@@ -27,13 +31,25 @@ const Genealogist = props => {
   }
   const colorOnChangeHandler = async clientId => {
     await dispatch(patchOrderingColorHandler(clientId, colorRef.current.value))
+    await dispatch(getOrderingHandler())
     setColor(colorRef.current.value)
+  }
+
+  const sortGenealogistHandler = async event => {
+    const status = event.target.value
+    await dispatch(getOrderingHandler(status))
+  }
+
+  const changeGenealogistStatusHandler = async (event, client) => {
+    await dispatch(patchOrderingStatusHandler(client, event.target.value))
+    await dispatch(getOrderingHandler())
+    setOrderId(client)
   }
 
   if (ordering) {
     return (
       <>
-        <GenealogistDropdownStatuses/>
+        <GenealogistDropdownStatuses text={"Сортувати"} onClickHandler={sortGenealogistHandler}/>
         {ordering.map((order) => {
           return (
             <div className={classes.order} key={order.id}>
@@ -57,6 +73,9 @@ const Genealogist = props => {
                 <div className={classes.info}>Статус:
                   {order.status}
                 </div>
+                  <Link to={`/tree/${order.rootTreeId}`}>Дерево клієнта</Link>
+                <GenealogistDropdownStatuses text="Змінити статус" statusId={order.id}
+                                             onClickHandler={changeGenealogistStatusHandler}/>
                 {!order.genealogistName &&
                   <button onClick={() => modalHandler(order.id)}>Вибрати генеалога</button>}
                 {order.genealogistName &&

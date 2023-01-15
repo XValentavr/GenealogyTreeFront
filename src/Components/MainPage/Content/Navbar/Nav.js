@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import classes from './styles/Nav.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { authFormActions } from "../../../../common/slices/authFormSlices/authFormSlice";
-import { NavLink } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import { authorizeActions } from "../../../../common/slices/registerSlices/authorizeSlice";
 import getUserHandler from "../../../../common/handlers/userHandlers/getUserHandler";
 import { getIsGenealogist, getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
@@ -11,6 +11,7 @@ import { userActions } from "../../../../common/slices/userSlices/userSlice";
 import getUserInformation from "../../../../common/handlers/userHandlers/getUserInformation";
 import treeInitialHandler from "../../../../common/handlers/treeHandlers/treeInitialHandler";
 import { getInitialTreeId } from "../../../../common/selectors/treeSelectors/treeSelectors";
+import GenealogistRegister from "../../../Genealogist/GenealogistRegister";
 
 let link = '/homepage'
 
@@ -64,17 +65,25 @@ const Nav = props => {
           <>
             {isGenealogist &&
               <li>
-                <NavLink activeClassName={classes.active} to="/genealogist">Замовлення</NavLink>
+                <NavLink activeClassName={classes.active} to="/orders">Замовлення</NavLink>
               </li>
             }
-            {initialTree &&
+            {isGenealogist &&
               <li>
-                <NavLink activeClassName={classes.active} to={`/tree/${initialTree}`}>Ваше дерево</NavLink>
+                <NavLink activeClassName={classes.active} to="/genealogist/register">Зареєструвати генеалога</NavLink>
               </li>
             }
-            <li>
-              <NavLink activeClassName={classes.active} to={link}>Профіль</NavLink>
-            </li>
+            {initialTree && !isGenealogist &&
+              <>
+                <li>
+                  <NavLink activeClassName={classes.active} to={`/tree/${initialTree}`}>Ваше дерево</NavLink>
+                </li>
+
+                <li>
+                  <NavLink activeClassName={classes.active} to={link}>Профіль</NavLink>
+                </li>
+              </>
+            }
             <li id='logout' onClick={logoutHandler}>Вийти з акаунту</li>
           </>
         )}

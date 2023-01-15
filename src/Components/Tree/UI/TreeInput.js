@@ -5,9 +5,9 @@ import React from "react";
 const TreeInput = React.forwardRef(({ readOnly, type, id, text, value, defaultValue, checked }, ref) => {
   return (
     <>
+      <label htmlFor={id}>{text}</label>
       <input checked={checked} id={id} type={type} readOnly={readOnly} className={classes.input}
              value={value ? value : undefined} defaultValue={defaultValue} ref={ref}/>
-      <label htmlFor={id}>{text}</label>
     </>
   );
 })

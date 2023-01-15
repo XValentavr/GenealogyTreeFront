@@ -33,19 +33,23 @@ const MainPage = props => {
               <Route path="/about">
                 <AboutUs/>
               </Route>
-              <Route path="/genealogist/register" exact>
-                <GenealogistRegister/>
-              </Route>
             </>)}
-          {isGenealogist && <Route path="/genealogist" exact>
-            <Genealogist/>
-          </Route>}
-          {isLoggedIn && <Route path="/profile/:userId" exact>
+          {isLoggedIn && isGenealogist &&<>
+            <Route path="/orders" exact>
+              <Genealogist/>
+            </Route>
+              <Route path="/tree/:treeId" exact>
+                <TreeArea/>
+              </Route>
+            <Route path="/genealogist/register" exact>
+              <GenealogistRegister/>
+            </Route>
+          </>}
+
+          {isLoggedIn && !isGenealogist && <Route path="/profile/:userId" exact>
             <Profile/>
           </Route>}
-          {isLoggedIn && <Route path="/tree/:treeId" exact>
-            <TreeArea/>
-          </Route>}
+
           {!isLoggedIn && <Redirect to="/homepage"/>}
           <Route path='*' exact>
             <Redirect to="/homepage"/>

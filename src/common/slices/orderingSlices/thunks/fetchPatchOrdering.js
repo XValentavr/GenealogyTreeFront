@@ -3,9 +3,9 @@ import treeApiClient from "../../../clients/treeApiClient";
 
 export const fetchPatchOrdering = createAsyncThunk(
   'orderingHandlers/fetchPatchOrdering',
-  async ({ client, genealogist, }, { rejectWithValue }) => {
+  async ({ client, status=null, genealogist=null}, { rejectWithValue }) => {
     try {
-      await treeApiClient.orderPatchTree(client, genealogist)
+      await treeApiClient.orderPatchTree(client, status, genealogist)
     } catch (error) {
       return rejectWithValue(error.message)
     }

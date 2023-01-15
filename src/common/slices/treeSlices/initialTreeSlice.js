@@ -30,8 +30,7 @@ const initialTreeSlice = createSlice({
       state.status = StatusesOfFetchingHelper.LOADING
       state.error = null;
     },
-    [fetchPatchTreeData.fulfilled]: (state, action) => {
-      state.treeData = action.payload
+    [fetchPatchTreeData.fulfilled]: (state) => {
       state.status = StatusesOfFetchingHelper.COMPLETED
       state.error = null
     },
