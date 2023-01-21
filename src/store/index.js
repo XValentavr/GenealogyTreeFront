@@ -7,6 +7,7 @@ import supportActions from "../common/slices/registerSlices/supportSlice";
 import orderingActions from "../common/slices/orderingSlices/orderingSlice";
 import usersActions from "../common/slices/usersSlices/usersSlice";
 import initialTreeActions from "../common/slices/treeSlices/initialTreeSlice";
+import orderingGenealogistActions from "../common/slices/orderingSlices/orgeringGenealogistSlice";
 
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     userInformation: userInformationActions.reducer,
     support: supportActions.reducer,
     ordering: orderingActions.reducer,
+    orderingGenealogist: orderingGenealogistActions.reducer,
     users: usersActions.reducer,
     tree: initialTreeActions.reducer
   }

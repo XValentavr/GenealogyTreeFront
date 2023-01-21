@@ -2,16 +2,15 @@ import React, { useCallback, useEffect } from "react";
 import classes from './styles/Nav.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { authFormActions } from "../../../../common/slices/authFormSlices/authFormSlice";
-import { NavLink, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { authorizeActions } from "../../../../common/slices/registerSlices/authorizeSlice";
 import getUserHandler from "../../../../common/handlers/userHandlers/getUserHandler";
-import { getIsGenealogist, getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
 import { userInformationActions } from "../../../../common/slices/userSlices/userInformationSlice";
 import { userActions } from "../../../../common/slices/userSlices/userSlice";
 import getUserInformation from "../../../../common/handlers/userHandlers/getUserInformation";
 import treeInitialHandler from "../../../../common/handlers/treeHandlers/treeInitialHandler";
 import { getInitialTreeId } from "../../../../common/selectors/treeSelectors/treeSelectors";
-import GenealogistRegister from "../../../Genealogist/GenealogistRegister";
+import { getUser } from "../../../../common/selectors/userSelectors/userDataSelector";
 
 let link = '/homepage'
 
@@ -47,7 +46,7 @@ const Nav = props => {
     }
 
   }, [user])
-  const isGenealogist = useSelector(getIsGenealogist)
+
   return (
     <div className={classes.wrapper}>
       <ul>
@@ -63,26 +62,30 @@ const Nav = props => {
         }
         {props.isLoggedIn && (
           <>
-            {isGenealogist &&
-              <li>
-                <NavLink activeClassName={classes.active} to="/orders">Замовлення</NavLink>
-              </li>
-            }
-            {isGenealogist &&
-              <li>
-                <NavLink activeClassName={classes.active} to="/genealogist/register">Зареєструвати генеалога</NavLink>
-              </li>
-            }
-            {initialTree && !isGenealogist &&
+            {props.isMainGenealogist &&
               <>
                 <li>
-                  <NavLink activeClassName={classes.active} to={`/tree/${initialTree}`}>Ваше дерево</NavLink>
+                  <NavLink activeClassName={classes.active} to="/orders">Замовлення</NavLink>
                 </li>
-
                 <li>
-                  <NavLink activeClassName={classes.active} to={link}>Профіль</NavLink>
+                  <NavLink activeClassName={classes.active} to="/genealogist/register">Зареєструвати генеалога</NavLink>
                 </li>
               </>
+            }
+            {props.isGenealogist && !props.isMainGenealogist && <>
+              <li>
+                <NavLink activeClassName={classes.active} to={`/orders/${user?.id}`}>Ваші роботи</NavLink>
+              </li>
+            </>}
+            {!props.isMainGenealogist && props.isGenealogist && initialTree &&
+              <li>
+                <NavLink activeClassName={classes.active} to={`/tree/${initialTree}`}>Ваше дерево</NavLink>
+              </li>
+            }
+            {!props.isMainGenealogist &&
+              <li>
+                <NavLink activeClassName={classes.active} to={link}>Профіль</NavLink>
+              </li>
             }
             <li id='logout' onClick={logoutHandler}>Вийти з акаунту</li>
           </>

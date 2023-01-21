@@ -72,6 +72,17 @@ class TreeApiClient {
     })
   }
 
+  getOrdersForGenealogist = (client) => {
+    const token = localStorage.getItem('token')
+    return this._makeRequest(`genealogistbuildstree/${client}/api/v1/fetch/genealogist/`, {
+      method: "GET",
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+      },
+    })
+  }
+
   orderPatchColorTree = (client, colorCode) => {
     const token = localStorage.getItem('token')
     return this._makeRequest(`genealogistbuildstree/${client}/api/v1/fetch/`, {

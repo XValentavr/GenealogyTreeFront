@@ -9,16 +9,19 @@ import MainNav from "./Content/Navbar/MainNav";
 import Profile from "../Profile/Profile";
 import { getIsLoggedIn } from "../../common/selectors/authorizationSelectors/authorizeSelector";
 import GenealogistRegister from "../Genealogist/GenealogistRegister";
-import { getIsMainGenealogist } from "../../common/selectors/userSelectors/userDataSelector";
+import { getIsGenealogist, getIsMainGenealogist } from "../../common/selectors/userSelectors/userDataSelector";
 import Genealogist from "../Genealogist/Genealogist";
 import TreeArea from "../Tree/TreeArea";
+import GenealogistOrders from "../Genealogist/GenealogistOrders";
 
 const MainPage = props => {
   const authFormIsOpened = useSelector(getAuthFormIsOpened)
   const isLoggedIn = useSelector(getIsLoggedIn)
-  const isGenealogist = useSelector(getIsMainGenealogist)
+  const isMainGenealogist = useSelector(getIsMainGenealogist)
+  const isGenealogist = useSelector(getIsGenealogist)
+  console.log('!isMainGenealogist ', !isMainGenealogist)
   return (
-    <MainNav isLoggedIn={isLoggedIn} isGenealogist={isGenealogist}>
+    <MainNav isLoggedIn={isLoggedIn} isMainGenealogist={isMainGenealogist} isGenealogist={isGenealogist}>
       {authFormIsOpened ?
         <FeedbackOrAuthForm/> :
         <Switch>
@@ -34,21 +37,28 @@ const MainPage = props => {
                 <AboutUs/>
               </Route>
             </>)}
-          {isLoggedIn && isGenealogist &&<>
+          {isLoggedIn && isGenealogist && <>
             <Route path="/orders" exact>
               <Genealogist/>
             </Route>
+
+            {isGenealogist &&
               <Route path="/tree/:treeId" exact>
                 <TreeArea/>
-              </Route>
+              </Route>}
+
+            {!isMainGenealogist &&
+              <Route path="/orders/:treeId" exact>
+                <GenealogistOrders/>
+              </Route>}
+
             <Route path="/genealogist/register" exact>
               <GenealogistRegister/>
             </Route>
+            {!isMainGenealogist && <Route path="/profile/:userId" exact>
+              <Profile/>
+            </Route>}
           </>}
-
-          {isLoggedIn && !isGenealogist && <Route path="/profile/:userId" exact>
-            <Profile/>
-          </Route>}
 
           {!isLoggedIn && <Redirect to="/homepage"/>}
           <Route path='*' exact>

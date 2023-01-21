@@ -10,7 +10,7 @@ import patchTreeDataHandler from "../../common/handlers/treeHandlers/patchTreeDa
 import treeInitialHandler from "../../common/handlers/treeHandlers/treeInitialHandler";
 import { useParams } from "react-router-dom";
 
-const TreeRootElement = props => {
+const TreeRootElement = ({ style }) => {
   const [showMore, setShowMore] = useState(false)
   const [addMore, setAddMore] = useState(false)
   const [readOnly, setReadOnly] = useState(true)
@@ -63,7 +63,7 @@ const TreeRootElement = props => {
 
 
   return (
-    <div className={classes.outer}>
+    <div className={classes.outer} style={style}>
       <TreeButton onClickHandler={onShowHandler} type="button" id="ShowMore" text="Показати більше інформації"/>
       <form onSubmit={formTreeSubmitHandler}>
         <div className={classes.inner}>
