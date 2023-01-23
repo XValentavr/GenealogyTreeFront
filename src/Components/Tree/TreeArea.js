@@ -1,8 +1,8 @@
 import classes from './styles/TreeArea.module.css'
 import TreeRootElement from "./TreeRootElement";
 import React, { useState } from "react";
-import useMousePositionHook from "../../hooks/useMousePositionHook";
 import ScrollContainer from "react-indiana-drag-scroll";
+import useMousePositionHook from "../../hooks/useMousePositionHook";
 
 const TreeArea = props => {
   const [scale, setScale] = useState(1)

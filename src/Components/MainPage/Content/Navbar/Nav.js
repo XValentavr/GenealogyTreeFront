@@ -77,7 +77,7 @@ const Nav = props => {
                 <NavLink activeClassName={classes.active} to={`/orders/${user?.id}`}>Ваші роботи</NavLink>
               </li>
             </>}
-            {!props.isMainGenealogist && props.isGenealogist && initialTree &&
+            {(!props.isMainGenealogist && !props.isGenealogist) && initialTree &&
               <li>
                 <NavLink activeClassName={classes.active} to={`/tree/${initialTree}`}>Ваше дерево</NavLink>
               </li>
