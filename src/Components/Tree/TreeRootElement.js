@@ -9,6 +9,8 @@ import TreeChangeDataButton from "./UI/TreeChangeDataButton";
 import patchTreeDataHandler from "../../common/handlers/treeHandlers/patchTreeDataHandler";
 import treeInitialHandler from "../../common/handlers/treeHandlers/treeInitialHandler";
 import { useParams } from "react-router-dom";
+import TreeAddNew from "./TreeAddNew";
+import TreeAddSomeone from "./TreeAddSomeone";
 
 const TreeRootElement = ({ style }) => {
   const [showMore, setShowMore] = useState(false)
@@ -32,10 +34,8 @@ const TreeRootElement = ({ style }) => {
   const onAddHandler = () => {
     setAddMore(!addMore)
   }
-  const closeHandler = () => {
-    setShowMore(!showMore)
-    setAddMore(!addMore)
-  }
+  const closeShowMoreHandler = () => setShowMore(!showMore)
+  const closeAddNewHandler = () => setAddMore(!addMore)
 
   const onChangeDataHandler = event => {
     event.preventDefault()
@@ -89,9 +89,8 @@ const TreeRootElement = ({ style }) => {
             <button type="reset" onReset={onChangeDataHandler}>Відмінити</button>
           </>}
       </form>
-      {showMore && <TreeShowMore onClose={closeHandler} entireData={rootTree}/>}
-      {addMore && <>
-      </>}
+      {showMore && <TreeShowMore onClose={closeShowMoreHandler} entireData={rootTree}/>}
+      {addMore && <TreeAddSomeone onClose = {closeAddNewHandler}/>}
     </div>
   );
 }

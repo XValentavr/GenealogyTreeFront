@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import TreeAddMore from "./TreeAddMore";
 import classes from "./styles/TreeRootElement.module.css";
 import TreeChangeDataButton from "./UI/TreeChangeDataButton";
-import { createPatchBodyAddMore } from "../../common/helpers/getPatchDataForTree";
+import { createPatchOrPostBodyAddMore } from "../../common/helpers/getPatchDataForTree";
 import patchTreeDataHandler from "../../common/handlers/treeHandlers/patchTreeDataHandler";
 import treeInitialHandler from "../../common/handlers/treeHandlers/treeInitialHandler";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,7 +49,7 @@ const TreeShowMore = ({ onClose, entireData }) => {
   const onSubmitHandler = async event => {
     event.preventDefault()
 
-    const body = createPatchBodyAddMore(getDateBirth,
+    const body = createPatchOrPostBodyAddMore(getDateBirth,
       getDateMarry,
       getMotherSurname,
       getPlaceOfBirth,
